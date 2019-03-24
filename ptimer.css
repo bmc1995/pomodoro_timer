@@ -79,6 +79,7 @@ div{
   .button-paused {
     border-style: double;
     border-width: 0 0 0 60px;
+    border-top-right-radius: 5px;
   }
   .button-play:hover {
     border-color: transparent transparent transparent #404040;

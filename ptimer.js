@@ -5,7 +5,15 @@ const incWork = document.getElementById('addWork');
 const decWork = document.getElementById('minusWork');
 const incBreak = document.getElementById('addBreak');
 const decBreak = document.getElementById('minusBreak');
+const timerDisplay = document.querySelector('#session');
 let timeMin = document.getElementById('time-min');
+let timeSec = document.getElementById('time-sec');
+let btnPaused;
+let minPaused;
+let secPaused;
+let pausedAt;
+let isplaying;
+let countdown;
 
 function incWorkTime(){
     if( workTime.innerText < 45){
@@ -37,25 +45,14 @@ function stopFunction() {
     btn.classList.replace('button-paused', 'button-play')
 };
 
-incWork.addEventListener('click',() => incWorkTime());
-decWork.addEventListener('click',() => decWorkTime());
-incBreak.addEventListener('click', () => incBreakTime());
-decBreak.addEventListener('click', () => decBreakTime());
-
-
-
 //timer functions
-const timerDisplay = document.querySelector('#session')
-
-
-let countdown;
 function timer(seconds){
     const now = Date.now();
     const then = now + seconds * 1000
     displayTimeLeft(seconds)
     
     countdown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        let secondsLeft = Math.round((then - Date.now()) / 1000);
         if(secondsLeft < 0){
             clearInterval(countdown);
             return;
@@ -69,7 +66,33 @@ function displayTimeLeft(seconds){
     const secondsRemainder = Math.floor(seconds % 60);
     const display = `${minutes}:${secondsRemainder < 10 ? "0" : ""}${
     secondsRemainder}`
+    minPaused = minutes;
+    secPaused = secondsRemainder;
 
     timerDisplay.textContent = display;
     console.log({minutes, secondsRemainder});
 }
+function startTimer(){
+    if(isplaying == true){
+        pausedAt = (minPaused*60) + secPaused;
+        clearInterval(countdown)
+        isplaying = false
+    }
+    
+    else if(isplaying == false){
+        let secnds = pausedAt;
+        timer(secnds);
+        isplaying = true
+        }
+    else{
+        let start = parseInt(timeMin.textContent)*60;
+        timer(start);
+        isplaying = true;
+    }
+}
+
+incWork.addEventListener('click',() => incWorkTime());
+decWork.addEventListener('click',() => decWorkTime());
+incBreak.addEventListener('click', () => incBreakTime());
+decBreak.addEventListener('click', () => decBreakTime());
+btn.addEventListener('click', () => startTimer());
