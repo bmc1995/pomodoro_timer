@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pomodoro Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="ptimer.css">
+    <script defer src="ptimer.js"></script>
+</head>
+<body>
+    <div id="container">
+        
+        <div id="timer-container">
+            <h1 id="title">Pomodoro Timer!</h1>
+            <div id="timerSettings">
+                <div id="work"><b>Work Time</b>
+                    <p id="workVal">25</p>
+                    <a href="#" id="addWork" class="incdec">+</a>
+                    <a href="#" id="minusWork" class="incdec">-</a>
+                </div> 
+                <div id="break"> <b>Break Time</b>
+                    <p id="breakVal">5</p>
+                    <a href="#" id="addBreak" class="incdec">+</a>
+                    <a href="#" id="minusBreak" class="incdec">-</a>
+                </div>
+        </div>
+            <div id="session">
+                <span class="time-left" id="time-min">25</span>:<span class="time-left" id="time-sec">00</span></div>
+            <div id="playSettings">
+                <div id="start"><button onclick="myFunction()" id="playButton" class="button-play"></button></div>
+                <div id="stop"><button onclick="stopFunction()" id="stopButton"></button></div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
